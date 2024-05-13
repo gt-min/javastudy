@@ -50,4 +50,4 @@ backend (전자정부 egov : spring framework)
   git
   project - CRUD (create, read, update, delete)
 -----------------------------
-  민경태
+  민경태 : 010-8725-4966
