@@ -158,6 +158,28 @@ public class ArrayEx {
     System.out.println(arr1[1].length);  // 2
     System.out.println(arr1[2].length);  // 2
     
+    // 행과 열 길이를 이용한 배열 순회
+    for(int i = 0; i < arr1.length; i++) {
+      for(int j = 0; j < arr1[i].length; j++) {
+        System.out.print(arr1[i][j]);
+      }
+      System.out.println();
+    }
+    /*
+    for(int j = 0; j < arr1[0].length; j++) {
+      System.out.print(arr1[0][j]);
+    }
+    System.out.println();
+    for(int j = 0; j < arr1[1].length; j++) {
+      System.out.print(arr1[1][j]);
+    }
+    System.out.println();
+    for(int j = 0; j < arr1[2].length; j++) {
+      System.out.print(arr1[2][j]);
+    }
+    System.out.println();
+    */
+    
     // 배열의 선언과 생성 2
     int[][] arr2 = new int[3][];
     
@@ -173,6 +195,14 @@ public class ArrayEx {
     System.out.println(arr2[0].length);  // 2
     System.out.println(arr2[1].length);  // 3
     System.out.println(arr2[2].length);  // 4
+    
+    // 행과 열 길이를 이용한 배열 순회
+    for(int i = 0; i < arr2.length; i++) {
+      for(int j = 0; j < arr2[i].length; j++) {
+        System.out.print(arr2[i][j]);
+      }
+      System.out.println();
+    }
     
   }
   
