@@ -60,10 +60,81 @@ public class ArrayEx {
   
   public static void ex2() {
     
+    /*
+     * 배열의 길이
+     * 1. 생성된 배열의 길이는 수정할 수 없다.
+     * 2. 배열의 길이는 length 필드를 통해서 확인할 수 있다.
+     * 3. 형식
+     *   배열이름.length
+     */
+    
+    // 배열의 선언과 생성을 동시에 진행
+    int[] arr = new int[3];
+    
+    // 배열의 길이 확인
+    System.out.println(arr.length);
+    
+    // 배열의 길이를 활용한 배열 요소의 접근
+    for(int i = 0; i < arr.length; i++) {
+      System.out.println(arr[i]);
+    }
+    
+    // 배열의 마지막 요소는 항상 인덱스가 "길이 - 1"로 정해져 있다.
+    System.out.println(arr[arr.length - 1]);
+    
+  }
+  
+  public static void ex3() {
+    
+    /*
+     * 배열의 초기화
+     * 1. 배열을 생성할 때 초기 값을 전달할 수 있다.
+     * 2. 중괄호 {}를 이용해서 초기 값들을 한 번에 전달한다.
+     * 3. 형식
+     *   1) 배열의 선언과 반드시 함께 해야하는 초기화
+     *     자료형[] 배열이름 = {값1, 값2, 값3};
+     *   2) 배열의 선언과 분리할 수 있는 초기화
+     *     자료형[] 배열이름;
+     *     배열이름 = new 자료형[]{값1, 값2, 값3};
+     */
+    
+    // 배열의 선언과 반드시 함께 해야하는 초기화
+    String[] seasons = {"spring", "summer", "autumn", "winter"};
+    for(int i = 0; i < seasons.length; i++) {
+      System.out.println(seasons[i]);
+    }
+    
+    // 배열의 선언과 분리할 수 있는 초기화
+    String[] hobbies;
+    hobbies = new String[] {"game", "movie", "swim"};
+    for(int i = 0; i < hobbies.length; i++) {
+      System.out.println(hobbies[i]);
+    }
+    
+  }
+
+  public static void ex4() {
+    
+    /*
+     * advanced for
+     * 1. 향상 for 문이다.
+     * 2. 인덱스를 지정하지 않는 for 문이다.
+     * 3. 형식
+     *   for(배열요소 : 배열) { }
+     */
+    
+    // 배열의 생성 및 초기화
+    String[] movies = {"범죄도시", "파묘"};
+    
+    // advanced for
+    for(String movie : movies) {
+      System.out.println(movie);
+    }
+    
   }
   
   public static void main(String[] args) {
-    ex1();
+    ex4();
   }
 
 }
