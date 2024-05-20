@@ -5,18 +5,15 @@ public class BankAccountEx {
   public static void main(String[] args) {
     
     // BankAccount 타입의 인스턴스 생성
-    BankAccount bankAccount = new BankAccount("010-1234-5678", 0);
+    BankAccount bankAccount1 = new BankAccount("010-1234-5678", 100);
+    BankAccount bankAccount2 = new BankAccount("010-9876-5432", 200);
     
-    // 입금 및 조회
-    bankAccount.deposit(-10);
-    bankAccount.deposit(100);
-    bankAccount.deposit(200);
-    bankAccount.inquiry();
+    // 이체 (출금 -> 입금)
+    // bankAccount1 -> bankAccount2, 100 이체하기
+    bankAccount1.transfer(bankAccount2, 500);
     
-    // 출금 및 조회
-    System.out.println(bankAccount.withdrawal(500) + "원 출금 성공!");
-    System.out.println(bankAccount.withdrawal(300) + "원 출금 성공!");
-    bankAccount.inquiry();
+    bankAccount1.inquiry();  // 계좌 잔액 : 0원
+    bankAccount2.inquiry();  // 계좌 잔액 : 300원
     
   }
 
