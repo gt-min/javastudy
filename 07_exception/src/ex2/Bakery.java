@@ -43,6 +43,35 @@ public class Bakery {
    */
   public BreadChange sell(int count, int money) throws RuntimeException {
     
+    // 빵이 부족하다.
+    if(this.count < count) {
+      throw new RuntimeException("빵이 부족하다.");
+    }
+    
+    // 거스름돈이 부족하다.
+    int change = money - count * PRICE;
+    if(this.money < change) {
+      throw new RuntimeException("거스름돈이 부족하다.");
+    }
+    
+    // 고객이 돈을 안 냈다.
+    if(money <= 0) {
+      throw new RuntimeException("고객이 돈을 안 냈다.");
+    }
+    
+    // 고객이 낸 돈이 부족하다.
+    int earning = count * PRICE;
+    if(money < earning) {
+      throw new RuntimeException("고객이 낸 돈이 부족하다.");
+    }
+    
+    // 판매 처리하기
+    this.count -= count;
+    this.money += earning;
+    
+    // 고객에게 돌려 줄 BreadChange 인스턴스
+    return new BreadChange(count, change);
+    
   }
   
 }
