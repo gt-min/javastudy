@@ -22,19 +22,22 @@ public class Cart {
     this.products = products;
   }
 
-  // 물건 추가하기
+  // 물건 담기
   public void addProduct(Product product) {
-    
+    products.add(product);
   }
   
   // 물건 빼기
   public void removeProduct(int index) {
-    
+    Product product = products.remove(index);
+    System.out.println("뺀 물건 : " + product.getName());
   }
   
   // 물건 빼기
   public void removeProduct(Product product) {
-    
+    if(products.remove(product)) {
+      System.out.println("뺀 물건 : " + product.getName());
+    }
   }
   
 }
