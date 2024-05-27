@@ -25,7 +25,7 @@ public class BusEx {
       bus.passengerList();
       
     } catch (RuntimeException e) {
-      System.out.println(e.getMessage());  // 만차입니다.  // 없는좌석입니다.
+      System.out.println(e.getMessage());  // 만석입니다.  // 없는좌석입니다.
     }
 
   }
