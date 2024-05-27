@@ -6,7 +6,7 @@ import java.util.List;
 public class Bus {
 
   private List<Seat> seats;
-  public static final int LIMIT = 5;
+  public static final int LIMIT = 25;
   private int numOfPerson;
   
   public Bus() {
