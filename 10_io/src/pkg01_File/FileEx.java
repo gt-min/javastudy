@@ -1,6 +1,7 @@
 package pkg01_File;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 
 public class FileEx {
 
@@ -42,8 +43,25 @@ public class FileEx {
     
   }
   
+  public static void ex2() {
+    
+    String javaHome = "C:/Program Files/Java/jdk-21";
+    
+    File dir = new File(javaHome);
+    
+    File[] listFiles = dir.listFiles();
+    for(int i = 0; i < listFiles.length; i++) {
+      System.out.println(listFiles[i].getPath());      // 전체 경로
+      System.out.println(listFiles[i].getParent());    // 저장 디렉터리
+      System.out.println(listFiles[i].getName());      // 파일 및 디렉터리
+      System.out.println(new SimpleDateFormat("yyyy-MM-dd a h:mm").format(listFiles[i].lastModified())); // 최종 수정일
+      System.out.println(listFiles[i].length());       // 크기
+    }
+    
+  }
+  
   public static void main(String[] args) {
-    ex1();
+    ex2();
   }
 
 }
