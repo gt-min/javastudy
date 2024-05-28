@@ -40,7 +40,7 @@ public class PracticeEx {
     // 로마
     // 5개 정답 성공
     
-     Map<String, String> map = Map.of("프랑스", "파리"
+    Map<String, String> map = Map.of("프랑스", "파리"
                                    , "독일", "베를린"
                                    , "이탈리아", "로마"
                                    , "스위스", "베른"
@@ -121,8 +121,8 @@ public class PracticeEx {
     // 8 : ####### 7
     // 9 : ########### 11
 
-    int[] numbers = new int[100];    // 100개 난수
-    int[] frequencies = new int[10]; // 각 숫자의 빈도수
+    int[] numbers = new int[100];     // 100개 난수
+    int[] frequencies = new int[10];  // 각 숫자의 빈도수
     
   }
   
@@ -160,7 +160,7 @@ public class PracticeEx {
   }
   
   public static void main(String[] args) {
-    ex1();    
+    ex1();
   }
 
 }
