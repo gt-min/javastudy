@@ -9,7 +9,7 @@ public class FileUtilsEx {
     File srcDir = new File("C:/Program Files/Git");
     File src = new File(srcDir, "ReleaseNotes.html");
     
-    File destDir = new File("C:/storage");
+    File destDir = new File("/storage");
     File dest = new File(destDir, "ReleaseNotes.html");
     
     FileUtils.copy(src, dest);
