@@ -99,7 +99,7 @@ public class WriterEx {
   }
   
   public static void main(String[] args) {
-    ex3();  
+    ex3();
   }
 
 }
