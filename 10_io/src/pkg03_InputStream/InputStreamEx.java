@@ -1,5 +1,6 @@
 package pkg03_InputStream;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -113,8 +114,39 @@ public class InputStreamEx {
     
   }
   
+  public static void ex3() {
+    
+    File dir = new File("/storage");
+    File file = new File(dir, "1.dat");
+    
+    BufferedInputStream in = null;
+    
+    try {
+      
+      in = new BufferedInputStream(new FileInputStream(file));
+      
+      byte[] b = new byte[(int)file.length()];
+      int idx = 0;
+      
+      byte[] bytes = new byte[5];
+      int readByte = 0;
+      
+      while((readByte = in.read(bytes)) != -1) {
+        System.arraycopy(bytes, 0, b, idx, readByte);
+        idx += readByte;
+      }
+      
+      System.out.println(new String(b));
+      in.close();
+      
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
+  }
+  
   public static void main(String[] args) {
-    ex2();
+    ex3();
   }
 
 }
