@@ -1,8 +1,10 @@
 package pkg04_Writer;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class WriterEx {
 
@@ -54,9 +56,50 @@ public class WriterEx {
     }
     
   }
+
+  public static void ex2() {
+    
+    File dir = new File("/storage");
+    if(!dir.exists()) {
+      dir.mkdirs();
+    }
+    File file = new File(dir, "2.txt");
+    
+    try(BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+      
+      out.write("안녕하세요");
+      out.newLine();  // BufferedWriter 클래스에서 지원
+      out.write("반갑습니다");
+      
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
+  }
+  
+  public static void ex3() {
+    
+    File dir = new File("/storage");
+    if(!dir.exists()) {
+      dir.mkdirs();
+    }
+    File file = new File(dir, "3.html");
+    
+    try(PrintWriter out = new PrintWriter(file)) {
+      
+      // println() : 자동 줄 바꿈 처리
+      out.println("<script>");
+      out.println("alert('안녕하세요\\n반갑습니다')");
+      out.println("</script>");
+      
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
+  }
   
   public static void main(String[] args) {
-    ex1();  
+    ex3();  
   }
 
 }
