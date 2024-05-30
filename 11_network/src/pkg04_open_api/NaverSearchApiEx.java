@@ -1,12 +1,19 @@
 package pkg04_open_api;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -97,11 +104,18 @@ public class NaverSearchApiEx {
      *   obj.getJSONArray("hobbies").getString(1) == "travel"
      */
     
+    File dir = new File("/storage/" + query + "-" + new SimpleDateFormat("yyyyMMddHHMMss").format(new Date()));
+    if(!dir.exists()) {
+      dir.mkdirs();
+    }
+
     List<Book> books = new ArrayList<Book>();
     
     JSONObject obj = new JSONObject(result);
     JSONArray items = obj.getJSONArray("items");
+    
     for(int i = 0, length = items.length(); i < length; i++) {
+      
       JSONObject item = items.getJSONObject(i);
       String title = item.getString("title");
       String link = item.getString("link");
@@ -111,8 +125,13 @@ public class NaverSearchApiEx {
       String publisher = item.getString("publisher");
       String isbn = item.getString("isbn");
       String description = item.getString("description");
+      
       Book book = new Book(title, link, image, author, discount, publisher, isbn, description);
       books.add(book);
+      
+      File file = new File(dir, isbn + ".jpg");
+      download(file, image);
+      
     }
     
     for(Book book : books) {
@@ -130,10 +149,32 @@ public class NaverSearchApiEx {
     // 검색할때마다 /storage 디렉터리 아래에 "검색어-검색날짜" 형식의
     // 디렉터리를 만들고 그 안에 image 를 모두 다운로드 받으시오.
     
-    // 예시) "자바"를 "2024-05-30 18:00" 에 검색한 경우
-    // 디렉터리명 : 자바-202408301800
-    // image 명   : title.jpg
+    // 예시) "자바"를 "2024-05-30 18:00:30" 에 검색한 경우
+    // 디렉터리명 : 자바-20240830180030
+    // image 명   : isbn.jpg
     
+  }
+  
+  public static void download(File file, String image) throws Exception {
+    
+    URL url = URI.create(image).toURL();
+    HttpURLConnection  con = (HttpURLConnection) url.openConnection();
+      
+    con.connect();
+      
+    BufferedInputStream in = new BufferedInputStream(con.getInputStream());
+    BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+    
+    byte[] b = new byte[10];
+    int readByte = 0;
+    
+    while((readByte = in.read(b)) != -1) {
+      out.write(b, 0, readByte);
+    }
+    
+    out.close();
+    in.close();
+      
   }
 
 }
