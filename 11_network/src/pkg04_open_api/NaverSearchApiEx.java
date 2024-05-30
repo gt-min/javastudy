@@ -127,8 +127,19 @@ public class NaverSearchApiEx {
       System.out.println();
     }
     
-    // 
+    // 검색할때마다 /storage 디렉터리 아래에 "검색어-검색날짜" 형식의
+    // 디렉터리를 만들고 그 안에 image 를 모두 다운로드 받으시오.
+    
+    // 예시) "자바"를 "2024-05-30 18:00" 에 검색한 경우
+    // 디렉터리명 : 자바-202408301800
+    // image 명   : title.jpg
 
+    
+    
+    
+    
+    
+    
   }
 
 }
