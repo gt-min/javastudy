@@ -6,7 +6,13 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class NaverSearchApiEx {
 
@@ -49,14 +55,79 @@ public class NaverSearchApiEx {
       builder.append(line + "\n");
     }
     
-    // 응답 결과 (json) 확인
-    System.out.println(builder.toString());
-    
     // 스트림 닫기
     in.close();
     
     // 접속 해제
     conn.disconnect();
+    
+    // 응답 결과 (json)
+    String result = builder.toString();
+    
+    // JSON 데이터
+    // 1. 객체 : { }
+    // 2. 배열 : [ ]
+    
+    // JSON 라이브러리
+    // 1. 객체 : org.json.JSONObject
+    // 2. 배열 : org.json.JSONArray
+    
+    // JSON 라이브러리 사용 방법
+    /*
+     * JSONObject obj = {
+     *   "name": "kim",
+     *   "age": 20,
+     *   "home": {
+     *     "address": "seoul",
+     *     "phone": "010-1111-1111"
+     *   },
+     *   "hobbies": [
+     *     "game",
+     *     "travel"
+     *   ]
+     * }
+     * 
+     * obj.getString("name") == "kim"
+     * obj.getInt("age")     == 20
+     * obj.getJSONObject("home")   == {"address": "seoul", "phone": "010-1111-1111"}
+     *   obj.getJSONObject("home").getString("address") == "seoul"
+     *   obj.getJSONObject("home").getString("phone")   == "010-1111-1111"
+     * obj.getJSONArray("hobbies") == ["game", "travel"]
+     *   obj.getJSONArray("hobbies").getString(0) == "game"
+     *   obj.getJSONArray("hobbies").getString(1) == "travel"
+     */
+    
+    List<Book> books = new ArrayList<Book>();
+    
+    JSONObject obj = new JSONObject(result);
+    JSONArray items = obj.getJSONArray("items");
+    for(int i = 0, length = items.length(); i < length; i++) {
+      JSONObject item = items.getJSONObject(i);
+      String title = item.getString("title");
+      String link = item.getString("link");
+      String image = item.getString("image");
+      String author = item.getString("author");
+      String discount = item.getString("discount");
+      String publisher = item.getString("publisher");
+      String isbn = item.getString("isbn");
+      String description = item.getString("description");
+      Book book = new Book(title, link, image, author, discount, publisher, isbn, description);
+      books.add(book);
+    }
+    
+    for(Book book : books) {
+      System.out.println("title : " + book.getTitle());
+      System.out.println("link : " + book.getLink());
+      System.out.println("image : " + book.getImage());
+      System.out.println("author : " + book.getAuthor());
+      System.out.println("discount : " + book.getDiscount());
+      System.out.println("publisher : " + book.getPublisher());
+      System.out.println("isbn : " + book.getIsbn());
+      System.out.println("description : " + book.getDescription());
+      System.out.println();
+    }
+    
+    // 
 
   }
 
