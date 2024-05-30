@@ -5,7 +5,6 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -158,7 +157,7 @@ public class NaverSearchApiEx {
   public static void download(File file, String image) throws Exception {
     
     URL url = URI.create(image).toURL();
-    HttpURLConnection  con = (HttpURLConnection) url.openConnection();
+    HttpURLConnection con = (HttpURLConnection) url.openConnection();
       
     con.connect();
       
