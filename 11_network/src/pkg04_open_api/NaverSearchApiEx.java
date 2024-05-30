@@ -7,7 +7,6 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,6 +21,7 @@ public class NaverSearchApiEx {
     Scanner sc = new Scanner(System.in);
     System.out.print("검색어 입력 >>> ");
     String query = sc.nextLine();  // 공백 포함한 문자열 입력이 가능하다.
+    sc.close();
     
     // 요청 주소
     String apiURL = "https://openapi.naver.com/v1/search/book?query=" + URLEncoder.encode(query, "UTF-8");
@@ -133,12 +133,6 @@ public class NaverSearchApiEx {
     // 예시) "자바"를 "2024-05-30 18:00" 에 검색한 경우
     // 디렉터리명 : 자바-202408301800
     // image 명   : title.jpg
-
-    
-    
-    
-    
-    
     
   }
 
