@@ -5,8 +5,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 public class HttpURLConnectionEx {
 
@@ -49,10 +47,23 @@ public class HttpURLConnectionEx {
     
     try {
       
+      // 접속 생성
       url = URI.create(spec).toURL();
       con = (HttpURLConnection) url.openConnection();
       
-      System.out.println(con.getResponseCode());
+      // 접속 설정
+      con.setConnectTimeout(15000);  // 타임아웃 15000밀리초 = 15초까지 기다려주겠다.
+      con.setRequestMethod("GET");   // GET 방식 요청(GET : URL을 이용한 요청, POST : 본문(Body)을 이용한 요청)
+      
+      // 접속
+      con.connect();
+      
+      // 상태 코드
+      int responseCode = con.getResponseCode();
+      if(responseCode != HttpURLConnection.HTTP_OK) {
+        System.out.println("접속 실패");
+        return;
+      }
       
       /*
        * Content-Type
@@ -68,7 +79,9 @@ public class HttpURLConnectionEx {
       
       /*
        * 요청 헤더 확인하기
-       * 
+       * 1. User-Agent     : 무엇으로 접속하였는지에 관한 정보
+       * 2. Referer        : 이전 접속 주소 정보
+       * 3. Content-Type   : 컨텐트 타입
        */
       
       // 헤더 명시하기
@@ -76,12 +89,6 @@ public class HttpURLConnectionEx {
       String userAgent = con.getRequestProperty("User-Agent");
       System.out.println("content-type : " + content_type);
       System.out.println("user-agent : " + userAgent);
-      
-      // 전체 헤더 확인하기
-      Map<String, List<String>> header = con.getRequestProperties();
-      for(Map.Entry<String, List<String>> entry : header.entrySet()) {
-        System.out.println(entry.getKey() + " : " + entry.getValue());
-      }
 
       // 접속 해제
       con.disconnect();
