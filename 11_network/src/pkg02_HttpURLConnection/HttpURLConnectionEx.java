@@ -1,5 +1,9 @@
 package pkg02_HttpURLConnection;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -99,8 +103,58 @@ public class HttpURLConnectionEx {
     
   }
   
+  public static void ex3() {
+    
+    String spec = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
+    URL url = null;
+    HttpURLConnection con = null;
+    
+    BufferedInputStream in = null;
+    BufferedOutputStream out = null;
+    
+    try {
+      
+      url = URI.create(spec).toURL();
+      con = (HttpURLConnection) url.openConnection();
+      
+      con.connect();
+      
+      int responseCode = con.getResponseCode();
+      if(responseCode != HttpURLConnection.HTTP_OK) {
+        throw new RuntimeException("접속 실패");
+      }
+      
+      in = new BufferedInputStream(con.getInputStream());
+      
+      File dir = new File("/storage");
+      if(!dir.exists()) {
+        dir.mkdirs();
+      }
+      File file = new File(dir, "google-logo.png");
+      
+      out = new BufferedOutputStream(new FileOutputStream(file));
+      
+      byte[] b = new byte[10];
+      int readByte = 0;
+      
+      // 10바이트 읽기 → /storage/google-logo.png : 끝날때까지 반복
+      while((readByte = in.read(b)) != -1) {
+        out.write(b, 0, readByte);
+      }
+      
+      System.out.println(file.getPath() + " 파일 생성 완료");
+      
+      out.close();
+      in.close();
+      
+    } catch (IOException | RuntimeException e) {
+      e.printStackTrace();
+    }
+    
+  }
+  
   public static void main(String[] args) {
-    ex2();
+    ex3();
   }
 
 }
